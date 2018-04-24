@@ -19,15 +19,15 @@
 ----------------
 要使飞碟具有物理效果，需要在飞碟预制添加刚体。当然也可以在代码中动态生成，但有一点要注意的是不能在update函数里给gameObject添加刚体，虽然游戏能正常运行，但在运行的过程中会弹出“该gameObject已经添加了刚体”的重复警告。如果飞碟要完成平抛运动的话需要有一个竖直向下的恒力，刚体本身是有提供重力的，但由于这个力太大飞碟会下落的很快，所以我把刚体的重力勾选取掉，在代码里面动态添加一个竖直向下的力。  
 
-飞碟预制：    
++ 飞碟预制：    
 ![飞碟预制](https://raw.githubusercontent.com/MapleLai/Homework5/master/Screenshot/%E9%A3%9E%E7%A2%9F%E9%A2%84%E5%88%B6.png)  
 
-利用Unity优秀的物理引擎可以帮我们达到的预想的物理效果，因为与运动学版的飞碟游戏在很多代码上都是差不多的，因此只介绍2个版本在飞碟飞行实现的不同之处。  
-运动学版：利用Translate函数使飞碟在每个deltaTime内按speed速度沿着direction方向飞行，这是一个直线运动。  
+利用Unity优秀的物理引擎可以帮我们达到的预想的物理效果，因为与运动学版的飞碟游戏在很多代码上都是差不多的，因此只介绍2个版本在飞碟飞行实现的不同之处。    
++ 运动学版：利用Translate函数使飞碟在每个deltaTime内按speed速度沿着direction方向飞行，这是一个直线运动。  
 <pre>transform.Translate(gameobject.GetComponent<Disk>().direction * 
                     gameobject.GetComponent<Disk>().speed * 
                     Time.deltaTime);</pre>  
-物理版：
++ 物理版：
 <pre>//给gameObject添加一个竖直向下的力
 gameobject.GetComponent<Rigidbody>().AddForce(0,-80,0);
 //在每个update里让飞碟都有一个水平向右的相同速度
